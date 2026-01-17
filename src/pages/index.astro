@@ -1,0 +1,102 @@
+---
+// Página principal del portfolio
+import "../styles/global.css";
+import "../styles/animations/curtains.css";
+import "../styles/animations/work.css";
+import Navbar from "../components/Navbar.astro";
+import ProjectModal from "../components/ProjectModal.astro";
+import { Linkedin, Github, Mail, FileDown } from "@lucide/astro";
+import { projects } from "../consts/projects.js";
+---
+
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jucara - Portfolio</title>
+  </head>
+  <body>
+    <Navbar />
+    <ProjectModal />
+    <main class="home" id="home">
+      <div class="curtains-container" id="curtains">
+        <div class="curtain curtain-left"></div>
+        <div class="curtain curtain-right"></div>
+      </div>
+      <div class="container">
+        <div class="greeting">
+          <h1 class="greeting-text">Hola, soy</h1>
+          <h2 class="brand-name">Jucara</h2>
+        </div>
+        <div class="social-links" aria-label="Redes de contacto">
+          <a class="social-link" href="https://www.linkedin.com/in/jucarata/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <Linkedin size={22} strokeWidth={1.8} />
+          </a>
+          <a class="social-link" href="https://github.com/jucarata" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+            <Github size={22} strokeWidth={1.8} />
+          </a>
+          <a class="social-link" href="mailto:juancaram21@gmail.com" aria-label="Correo">
+            <Mail size={22} strokeWidth={1.8} />
+          </a>
+          <a class="social-link" href="#" aria-label="Descargar CV">
+            <FileDown size={22} strokeWidth={1.8} />
+          </a>
+        </div>
+      </div>
+    </main>
+    <!-- Sección Work -->
+    <section class="content-section" id="work">
+      <div class="section-content">
+        <h2 class="section-title">WORK</h2>
+        <div class="work-carousel work-marquee" aria-label="Proyectos">
+          <div class="work-track work-track-marquee">
+            {projects.map((project, index) => (
+              <article class="work-card" data-project-index={index}>
+                <div class="work-image">
+                  <img src={project.image_url} alt={`Proyecto ${project.name}`} loading="lazy" />
+                </div>
+                <h3 class="work-title">{project.name}</h3>
+              </article>
+            ))}
+            {projects.map((project) => (
+              <article class="work-card" aria-hidden="true">
+                <div class="work-image">
+                  <img src={project.image_url} alt="" loading="lazy" />
+                </div>
+                <h3 class="work-title">{project.name}</h3>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Sección Contact -->
+    <section class="content-section" id="contact">
+      <div class="section-content">
+        <h2 class="section-title">Contact</h2>
+        <p class="section-text">Aquí irá tu información de contacto...</p>
+      </div>
+    </section>
+    <script type="module">
+      import { initCurtains } from "/src/scripts/animations/curtains.js";
+      import { initNavigation } from "/src/scripts/navigation.js";
+      import { initProjectModal } from "/src/scripts/projectModal.js";
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => {
+          setTimeout(() => {
+            initCurtains();
+            initNavigation();
+            initProjectModal();
+          }, 100);
+        });
+      } else {
+        setTimeout(() => {
+          initCurtains();
+          initNavigation();
+          initProjectModal();
+        }, 100);
+      }
+    </script>
+  </body>
+</html>

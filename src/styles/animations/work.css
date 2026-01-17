@@ -1,0 +1,111 @@
+/* Estilos del carrusel de proyectos */
+.work-carousel {
+  margin-top: 2rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
+}
+
+.work-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(260px, 360px);
+  gap: 1.5rem;
+  padding: 0 0.5rem;
+}
+
+.work-card {
+  scroll-snap-align: start;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(153, 13, 53, 0.15);
+  border-radius: 18px;
+  padding: 0.85rem;
+  width: 280px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.work-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(153, 13, 53, 0.3);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
+}
+
+.work-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(153, 13, 53, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.work-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.work-title {
+  margin-top: 0.9rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-dark-red);
+  text-align: left;
+}
+
+/* Scrollbar personalizada */
+.work-carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.work-carousel::-webkit-scrollbar-track {
+  background: rgba(153, 13, 53, 0.08);
+  border-radius: 999px;
+}
+
+.work-carousel::-webkit-scrollbar-thumb {
+  background: rgba(153, 13, 53, 0.35);
+  border-radius: 999px;
+}
+
+.work-carousel::-webkit-scrollbar-thumb:hover {
+  background: rgba(153, 13, 53, 0.5);
+}
+
+/* Animación de marquesina infinita */
+.work-marquee {
+  overflow: hidden;
+  scroll-snap-type: none;
+}
+
+.work-track-marquee {
+  display: flex;
+  gap: 1.5rem;
+  animation: work-marquee 60s linear infinite;
+  width: max-content;
+}
+
+.work-marquee:hover .work-track-marquee {
+  animation-play-state: paused;
+}
+
+@keyframes work-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-track-marquee {
+    animation: none;
+  }
+}

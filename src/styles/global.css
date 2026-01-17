@@ -1,0 +1,213 @@
+@font-face {
+  font-family: 'N2N';
+  src: url('/fonts/N2N-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'N2N';
+  src: url('/fonts/N2N-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'N2N';
+  src: url('/fonts/N2N-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --color-white: #FFFFFF;
+  --color-cream: #FFF8E8;
+  --color-gold: #FCD581;
+  --color-red: #D52941;
+  --color-dark-red: #990D35;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'N2N', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+body {
+  background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-white) 100%);
+  min-height: 200vh;
+  color: var(--color-dark-red);
+}
+
+.home {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+}
+
+.content-section {
+  width: 100%;
+  min-height: 100vh;
+  padding: 4rem 2rem 2rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  scroll-margin-top: 80px; /* Espacio para el navbar fijo */
+  padding-top: 6rem; /* Espaciado desde el viewport anterior */
+}
+
+.section-content {
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+}
+
+.section-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  color: var(--color-dark-red);
+  margin-bottom: 2rem;
+  letter-spacing: 0.02em;
+}
+
+.section-text {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  font-weight: 300;
+  color: var(--color-red);
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.spacer {
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+  max-width: 1200px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 1.8rem;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  color: var(--color-dark-red);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(153, 13, 53, 0.2);
+  text-decoration: none;
+  transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.social-link:hover {
+  transform: translateY(-2px);
+  color: var(--color-red);
+  background: rgba(255, 248, 232, 0.9);
+  border-color: rgba(153, 13, 53, 0.4);
+}
+
+.social-link:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+.greeting {
+  animation: fadeInUp 1s ease-out;
+}
+
+.greeting-text {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 300;
+  color: var(--color-red);
+  margin-bottom: 0;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.brand-name {
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 700;
+  color: var(--color-dark-red);
+  text-shadow:
+    0 0 20px rgba(153, 13, 53, 0.2),
+    0 4px 10px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.02em;
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+}
+
+.brand-name::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--color-gold) 0%,
+    var(--color-red) 50%,
+    var(--color-gold) 100%
+  );
+  border-radius: 2px;
+  animation: expandLine 1.2s ease-out 0.5s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes expandLine {
+  from {
+    width: 0;
+  }
+  to {
+    width: 60%;
+  }
+}
+
+@media (max-width: 768px) {
+  .home {
+    padding: 1rem;
+  }
+
+  .brand-name {
+    font-size: clamp(2.5rem, 12vw, 5rem);
+  }
+}

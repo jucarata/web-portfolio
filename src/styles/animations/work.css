@@ -82,26 +82,28 @@
 .work-marquee {
   overflow: hidden;
   scroll-snap-type: none;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.work-marquee:active {
+  cursor: grabbing;
 }
 
 .work-track-marquee {
   display: flex;
   gap: 1.5rem;
-  animation: work-marquee 60s linear infinite;
   width: max-content;
+  will-change: transform;
+  /* La animación CSS se desactiva, ahora se controla con JavaScript */
 }
 
-.work-marquee:hover .work-track-marquee {
-  animation-play-state: paused;
-}
-
-@keyframes work-marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+/* Desactivar la animación CSS cuando JavaScript está activo */
+.work-marquee.js-enabled .work-track-marquee {
+  animation: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

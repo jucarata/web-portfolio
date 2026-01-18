@@ -1,6 +1,7 @@
 import { initCurtains } from "./animations/curtains.js";
 import { initNavigation } from "./navigation.js";
 import { initProjectModal } from "./projectModal.js";
+import { initWorkCarousel } from "./workCarousel.js";
 
 export function initAll() {
   if (document.readyState === "loading") {
@@ -9,6 +10,7 @@ export function initAll() {
         initCurtains();
         initNavigation();
         initProjectModal();
+        initWorkCarousel();
       }, 100);
     });
   } else {
@@ -16,6 +18,7 @@ export function initAll() {
       initCurtains();
       initNavigation();
       initProjectModal();
+      initWorkCarousel();
     }, 100);
   }
 }

@@ -11,6 +11,29 @@ async function loadProjects(lang) {
   }
 }
 
+// Función helper para construir rutas con base path
+function getImageUrl(path) {
+  // Detectar el base path desde la URL actual
+  // En producción: /web-portfolio/
+  // En desarrollo: /
+  const currentPath = window.location.pathname;
+  let base = '';
+  
+  // Si la URL contiene /web-portfolio/, ese es nuestro base path
+  if (currentPath.includes('/web-portfolio')) {
+    base = '/web-portfolio';
+  }
+  
+  // Si la ruta ya tiene el base path, no duplicarlo
+  if (path.startsWith(base)) {
+    return path;
+  }
+  
+  // Construir la ruta completa con base path
+  const cleanPath = path.startsWith('/') ? path : '/' + path;
+  return base + cleanPath;
+}
+
 // Actualizar todos los textos de la página
 function updatePageTexts(lang) {
   // Actualizar elementos con data-i18n
@@ -61,10 +84,10 @@ async function updateProjects(lang) {
     const project = projects[index];
     if (!project) return;
 
-    // Actualizar imagen
+    // Actualizar imagen (con base path correcto)
     const img = card.querySelector('.work-image img');
     if (img) {
-      img.src = project.image_url;
+      img.src = getImageUrl(project.image_url);
       img.alt = `${t('project', lang)} ${project.name}`;
     }
 
@@ -91,7 +114,7 @@ async function updateProjects(lang) {
 
     const img = card.querySelector('.work-image img');
     if (img) {
-      img.src = project.image_url;
+      img.src = getImageUrl(project.image_url);
     }
 
     const title = card.querySelector('.work-title');
@@ -129,6 +152,12 @@ async function updateModal(lang) {
   if (window.currentProjectIndex !== undefined && window.currentProjects) {
     const project = window.currentProjects[window.currentProjectIndex];
     if (project) {
+      const modalImage = document.getElementById('modal-image');
+      if (modalImage) {
+        modalImage.src = getImageUrl(project.image_url);
+        modalImage.alt = `${t('project', lang)} ${project.name}`;
+      }
+      
       if (modalTitle) modalTitle.textContent = project.name;
       if (modalDescription) modalDescription.textContent = project.description || '';
       

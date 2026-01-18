@@ -41,6 +41,9 @@ const projectsWithUrls = projects.map(project => ({
   ...project,
   image_url: getImageUrl(project.image_url)
 }));
+
+// Construir URL del favicon con base path
+const faviconUrl = getImageUrl('/logo.svg');
 ---
 
 <html lang={currentLang}>
@@ -48,7 +51,7 @@ const projectsWithUrls = projects.map(project => ({
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jucara - Portfolio</title>
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="icon" type="image/svg+xml" href={faviconUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">

@@ -34,8 +34,6 @@ export function initProjectModal() {
   if (!modal || !modalOverlay || !modalClose) return;
 
   const workCards = document.querySelectorAll(".work-card[data-project-index]");
-  let hoverTimeout = null;
-  let currentCard = null;
 
   function openModal(projectIndex) {
     const project = projects[projectIndex];
@@ -59,11 +57,6 @@ export function initProjectModal() {
   function closeModal() {
     modal.classList.remove("active");
     document.body.style.overflow = "";
-    if (hoverTimeout) {
-      clearTimeout(hoverTimeout);
-      hoverTimeout = null;
-    }
-    currentCard = null;
     
     // Reanudar la animación del carrusel
     const workTrack = document.querySelector(".work-track-marquee");
@@ -72,24 +65,13 @@ export function initProjectModal() {
     }
   }
 
-  // Abrir modal después de 2 segundos de hover
+  // Abrir modal al hacer click en el proyecto
   workCards.forEach((card) => {
-    card.addEventListener("mouseenter", () => {
-      currentCard = card;
+    card.addEventListener("click", (e) => {
+      e.preventDefault();
       const projectIndex = parseInt(card.getAttribute("data-project-index"));
       if (isNaN(projectIndex)) return;
-
-      hoverTimeout = setTimeout(() => {
-        openModal(projectIndex);
-      }, 500);
-    });
-
-    card.addEventListener("mouseleave", () => {
-      if (hoverTimeout) {
-        clearTimeout(hoverTimeout);
-        hoverTimeout = null;
-      }
-      currentCard = null;
+      openModal(projectIndex);
     });
   });
 

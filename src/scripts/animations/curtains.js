@@ -34,10 +34,11 @@ export function initCurtains() {
     leftCurtain.style.transform = `translateX(-${translate}%) skewY(${skew}deg)`;
     rightCurtain.style.transform = `translateX(${translate}%) skewY(-${skew}deg)`;
 
-    // Controlar visibilidad del navbar (aparece al entrar al siguiente viewport)
+    // Controlar visibilidad del navbar (aparece antes para que las cortinas estén cerradas)
     const navbar = document.getElementById('navbar');
     if (navbar) {
-      if (scrollY >= viewportHeight) {
+      // Activar el navbar cuando se alcance el 70% del viewport para que las cortinas estén cerradas
+      if (scrollY >= viewportHeight * 0.7) {
         navbar.classList.add('visible');
       } else {
         navbar.classList.remove('visible');

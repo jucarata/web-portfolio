@@ -1,4 +1,16 @@
-import { projects } from "../consts/projects.js";
+import { getCurrentLanguage, t } from "../consts/i18n.js";
+
+// Cargar proyectos según el idioma
+async function loadProjects() {
+  const lang = getCurrentLanguage();
+  if (lang === 'es') {
+    const module = await import("../consts/projects.es.js");
+    return module.projects;
+  } else {
+    const module = await import("../consts/projects.en.js");
+    return module.projects;
+  }
+}
 
 // Función helper para construir rutas con base path
 function getImageUrl(path) {
@@ -23,7 +35,7 @@ function getImageUrl(path) {
   return base + cleanPath;
 }
 
-export function initProjectModal() {
+export async function initProjectModal() {
   const modal = document.getElementById("project-modal");
   const modalOverlay = document.getElementById("modal-overlay");
   const modalClose = document.getElementById("modal-close");
@@ -34,20 +46,36 @@ export function initProjectModal() {
 
   if (!modal || !modalOverlay || !modalClose) return;
 
+  // Cargar proyectos iniciales
+  const projects = await loadProjects();
+  window.currentProjects = projects;
+
+  // Actualizar aria-label del botón cerrar
+  if (modalClose) {
+    const lang = getCurrentLanguage();
+    modalClose.setAttribute('aria-label', t('closeModal', lang));
+  }
+
   const workCards = document.querySelectorAll(".work-card[data-project-index]");
 
-  function openModal(projectIndex) {
-    const project = projects[projectIndex];
+  async function openModal(projectIndex) {
+    const currentProjects = window.currentProjects || await loadProjects();
+    const project = currentProjects[projectIndex];
     if (!project) return;
 
+    // Guardar el índice del proyecto abierto
+    window.currentProjectIndex = projectIndex;
+
+    const lang = getCurrentLanguage();
     modalImage.src = getImageUrl(project.image_url);
-    modalImage.alt = `Proyecto ${project.name}`;
+    modalImage.alt = `${t('project', lang)} ${project.name}`;
     modalTitle.textContent = project.name;
     
-    // Actualizar estado del modal
+    // Actualizar estado del modal (sin traducir)
     if (modalState && project.state) {
+      const stateKey = project.state.toLowerCase();
       modalState.textContent = project.state;
-      modalState.className = `modal-state modal-state-${project.state.toLowerCase()}`;
+      modalState.className = `modal-state modal-state-${stateKey}`;
     }
     
     modalDescription.textContent = project.description || "";

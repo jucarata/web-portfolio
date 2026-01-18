@@ -6,7 +6,22 @@ import "../styles/animations/work.css";
 import Navbar from "../components/Navbar.astro";
 import ProjectModal from "../components/ProjectModal.astro";
 import { Linkedin, Github, Mail, FileDown } from "@lucide/astro";
-import { projects } from "../consts/projects.js";
+import { getCurrentLanguage, t } from "../consts/i18n.js";
+
+// Cargar proyectos según el idioma (default: en para SSR)
+const currentLang = typeof window !== 'undefined' 
+  ? (localStorage.getItem('language') || 'en')
+  : 'en';
+
+// Importar proyectos según el idioma
+let projects;
+if (currentLang === 'es') {
+  const projectsModule = await import("../consts/projects.es.js");
+  projects = projectsModule.projects;
+} else {
+  const projectsModule = await import("../consts/projects.en.js");
+  projects = projectsModule.projects;
+}
 
 // Función helper para construir rutas con base path
 const getImageUrl = (path) => {
@@ -28,7 +43,7 @@ const projectsWithUrls = projects.map(project => ({
 }));
 ---
 
-<html lang="es">
+<html lang={currentLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -47,7 +62,7 @@ const projectsWithUrls = projects.map(project => ({
       </div>
       <div class="container">
         <div class="greeting">
-          <h1 class="greeting-text">Hola, soy</h1>
+          <h1 class="greeting-text" data-i18n="greeting">{t('greeting', currentLang)}</h1>
           <h2 class="brand-name">Jucara</h2>
         </div>
         <div class="social-links" aria-label="Redes de contacto">
@@ -57,10 +72,10 @@ const projectsWithUrls = projects.map(project => ({
           <a class="social-link" href="https://github.com/jucarata" aria-label="GitHub" data-tooltip="GitHub" target="_blank" rel="noopener noreferrer">
             <Github size={22} strokeWidth={1.8} />
           </a>
-          <a class="social-link" href="mailto:contact.jucara+portfolio@gmail.com " aria-label="Correo" data-tooltip="Correo">
+          <a class="social-link" href="mailto:contact.jucara+portfolio@gmail.com " aria-label={t('email', currentLang)} data-tooltip={t('email', currentLang)}>
             <Mail size={22} strokeWidth={1.8} />
           </a>
-          <a class="social-link" href="#" aria-label="Descargar CV" data-tooltip="Descargar CV">
+          <a class="social-link" href="#" aria-label={t('downloadCV', currentLang)} data-tooltip={t('downloadCV', currentLang)}>
             <FileDown size={22} strokeWidth={1.8} />
           </a>
         </div>
@@ -69,13 +84,13 @@ const projectsWithUrls = projects.map(project => ({
     <!-- Sección Work -->
     <section class="content-section" id="work">
       <div class="section-content">
-        <h2 class="section-title">WORK</h2>
+        <h2 class="section-title" data-i18n="work">{t('work', currentLang).toUpperCase()}</h2>
         <div class="work-carousel work-marquee" aria-label="Proyectos">
           <div class="work-track work-track-marquee">
             {projectsWithUrls.map((project, index) => (
               <article class="work-card" data-project-index={index}>
                 <div class="work-image">
-                  <img src={project.image_url} alt={`Proyecto ${project.name}`} loading="lazy" />
+                  <img src={project.image_url} alt={`${t('project', currentLang)} ${project.name}`} loading="lazy" />
                 </div>
                 <div class="work-card-content">
                   <h3 class="work-title">{project.name}</h3>

@@ -2,11 +2,13 @@ import { initCurtains } from "./animations/curtains.js";
 import { initNavigation } from "./navigation.js";
 import { initProjectModal } from "./projectModal.js";
 import { initWorkCarousel } from "./workCarousel.js";
+import { initLanguage } from "./language.js";
 
 export function initAll() {
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
+        initLanguage();
         initCurtains();
         initNavigation();
         initProjectModal();
@@ -15,6 +17,7 @@ export function initAll() {
     });
   } else {
     setTimeout(() => {
+      initLanguage();
       initCurtains();
       initNavigation();
       initProjectModal();

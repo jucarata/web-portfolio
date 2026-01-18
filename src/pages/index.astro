@@ -77,26 +77,9 @@ import { projects } from "../consts/projects.js";
         <p class="section-text">Aquí irá tu información de contacto...</p>
       </div>
     </section>
-    <script type="module">
-      import { initCurtains } from "/src/scripts/animations/curtains.js";
-      import { initNavigation } from "/src/scripts/navigation.js";
-      import { initProjectModal } from "/src/scripts/projectModal.js";
-
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", () => {
-          setTimeout(() => {
-            initCurtains();
-            initNavigation();
-            initProjectModal();
-          }, 100);
-        });
-      } else {
-        setTimeout(() => {
-          initCurtains();
-          initNavigation();
-          initProjectModal();
-        }, 100);
-      }
+    <script>
+      import { initAll } from "../scripts/main.js";
+      initAll();
     </script>
   </body>
 </html>

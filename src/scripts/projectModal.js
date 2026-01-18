@@ -1,4 +1,4 @@
-import { projects } from "/src/consts/projects.js";
+import { projects } from "../consts/projects.js";
 
 export function initProjectModal() {
   const modal = document.getElementById("project-modal");

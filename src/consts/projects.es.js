@@ -32,7 +32,7 @@ export const projects = [
   {
     name: "Integra",
     description: "Interfaz grafica para la gestión de inventarios de activos de la empresa Procytec SAS",
-    state: "Finished",
+    state: "Development",
     image_url: "/images/projects/stage-integra.png"
   }
 ];

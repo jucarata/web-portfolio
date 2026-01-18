@@ -1,5 +1,28 @@
 import { projects } from "../consts/projects.js";
 
+// Función helper para construir rutas con base path
+function getImageUrl(path) {
+  // Detectar el base path desde la URL actual
+  // En producción: /web-portfolio/
+  // En desarrollo: /
+  const currentPath = window.location.pathname;
+  let base = '';
+  
+  // Si la URL contiene /web-portfolio/, ese es nuestro base path
+  if (currentPath.includes('/web-portfolio')) {
+    base = '/web-portfolio';
+  }
+  
+  // Si la ruta ya tiene el base path, no duplicarlo
+  if (path.startsWith(base)) {
+    return path;
+  }
+  
+  // Construir la ruta completa con base path
+  const cleanPath = path.startsWith('/') ? path : '/' + path;
+  return base + cleanPath;
+}
+
 export function initProjectModal() {
   const modal = document.getElementById("project-modal");
   const modalOverlay = document.getElementById("modal-overlay");
@@ -18,7 +41,7 @@ export function initProjectModal() {
     const project = projects[projectIndex];
     if (!project) return;
 
-    modalImage.src = project.image_url;
+    modalImage.src = getImageUrl(project.image_url);
     modalImage.alt = `Proyecto ${project.name}`;
     modalTitle.textContent = project.name;
     modalDescription.textContent = project.description || "";
@@ -58,7 +81,7 @@ export function initProjectModal() {
 
       hoverTimeout = setTimeout(() => {
         openModal(projectIndex);
-      }, 300);
+      }, 500);
     });
 
     card.addEventListener("mouseleave", () => {

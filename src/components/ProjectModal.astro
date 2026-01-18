@@ -19,7 +19,10 @@
       <img id="modal-image" src="" alt="" />
     </div>
     <div class="modal-info">
-      <h3 class="modal-title" id="modal-title"></h3>
+      <div class="modal-title-container">
+        <h3 class="modal-title" id="modal-title"></h3>
+        <span class="modal-state" id="modal-state"></span>
+      </div>
       <p class="modal-description" id="modal-description"></p>
     </div>
   </div>
@@ -118,12 +121,46 @@
     padding: 2rem;
   }
 
+  .modal-title-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
   .modal-title {
     font-size: 1.8rem;
     font-weight: 700;
     color: var(--color-dark-red);
-    margin-bottom: 1rem;
+    margin: 0;
     letter-spacing: 0.02em;
+    flex: 1;
+  }
+
+  .modal-state {
+    display: inline-block;
+    padding: 0.4rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: 'N2N', sans-serif;
+    white-space: nowrap;
+  }
+
+  .modal-state.modal-state-development {
+    background: rgba(100, 181, 246, 0.2);
+    color: #1976d2;
+    border: 1px solid rgba(100, 181, 246, 0.4);
+  }
+
+  .modal-state.modal-state-finished {
+    background: rgba(255, 167, 38, 0.2);
+    color: #f57c00;
+    border: 1px solid rgba(255, 167, 38, 0.4);
   }
 
   .modal-description {
@@ -143,6 +180,10 @@
 
     .modal-info {
       padding: 1.5rem;
+    }
+
+    .modal-title-container {
+      flex-wrap: wrap;
     }
 
     .modal-title {

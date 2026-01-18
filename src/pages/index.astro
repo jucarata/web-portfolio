@@ -74,7 +74,12 @@ const projectsWithUrls = projects.map(project => ({
                 <div class="work-image">
                   <img src={project.image_url} alt={`Proyecto ${project.name}`} loading="lazy" />
                 </div>
-                <h3 class="work-title">{project.name}</h3>
+                <div class="work-card-content">
+                  <h3 class="work-title">{project.name}</h3>
+                  <span class={`work-state work-state-${project.state.toLowerCase()}`}>
+                    {project.state}
+                  </span>
+                </div>
               </article>
             ))}
             {projectsWithUrls.map((project) => (
@@ -82,7 +87,12 @@ const projectsWithUrls = projects.map(project => ({
                 <div class="work-image">
                   <img src={project.image_url} alt="" loading="lazy" />
                 </div>
-                <h3 class="work-title">{project.name}</h3>
+                <div class="work-card-content">
+                  <h3 class="work-title">{project.name}</h3>
+                  <span class={`work-state work-state-${project.state.toLowerCase()}`}>
+                    {project.state}
+                  </span>
+                </div>
               </article>
             ))}
           </div>

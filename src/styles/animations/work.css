@@ -51,12 +51,45 @@
   display: block;
 }
 
-.work-title {
+.work-card-content {
   margin-top: 0.9rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.work-title {
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--color-dark-red);
   text-align: left;
+  margin: 0;
+}
+
+.work-state {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  width: fit-content;
+  font-family: 'N2N', sans-serif;
+}
+
+.work-state-development {
+  background: rgba(100, 181, 246, 0.2);
+  color: #1976d2;
+  border: 1px solid rgba(100, 181, 246, 0.4);
+}
+
+.work-state-finished {
+  background: rgba(255, 167, 38, 0.2);
+  color: #f57c00;
+  border: 1px solid rgba(255, 167, 38, 0.4);
 }
 
 /* Scrollbar personalizada */

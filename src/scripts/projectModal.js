@@ -29,6 +29,7 @@ export function initProjectModal() {
   const modalClose = document.getElementById("modal-close");
   const modalImage = document.getElementById("modal-image");
   const modalTitle = document.getElementById("modal-title");
+  const modalState = document.getElementById("modal-state");
   const modalDescription = document.getElementById("modal-description");
 
   if (!modal || !modalOverlay || !modalClose) return;
@@ -42,6 +43,13 @@ export function initProjectModal() {
     modalImage.src = getImageUrl(project.image_url);
     modalImage.alt = `Proyecto ${project.name}`;
     modalTitle.textContent = project.name;
+    
+    // Actualizar estado del modal
+    if (modalState && project.state) {
+      modalState.textContent = project.state;
+      modalState.className = `modal-state modal-state-${project.state.toLowerCase()}`;
+    }
+    
     modalDescription.textContent = project.description || "";
 
     modal.classList.add("active");

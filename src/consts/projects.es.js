@@ -11,5 +11,11 @@ export const projects = [
     description: "Integra es un dashboard de gestión de inventario de activos desarrollado para la empresa Procytec, que permite tanto a la organización como a sus clientes visualizar y administrar los activos disponibles o en arrendamiento. La aplicación cubre la creación y gestión de activos, así como todo el ciclo de vida del arrendamiento, incluyendo la generación de actas de entrega, devolución y baja, entre otros procesos asociados.\n\nEn este proyecto me desempeñé como desarrollador Full Stack, participando en el diseño e implementación de interfaces gráficas, la lógica de negocio del backend, siendo además responsable del diseño e implementación de la base de datos, y uno de los principales colaboradores en el diseño de la arquitectura de la aplicación.\n\nEste proyecto se encuentra actualmente en desarrollo y cuenta con restricciones de privacidad, por lo que no es posible proporcionar información detallada ni compartir un enlace de acceso a la plataforma.",
     state: "Development",
     image_url: "/images/projects/stage-integra.png"
+  },
+  {
+    name: "D-Bot",
+    description: "D-bot es un bot de WhatsApp que permite la generación de documentos legales para Colombia mediante el uso de Inteligencia Artificial.\n\nEn este proyecto fui responsable del diseño e implementación de la solución, incluyendo la integración con WhatsApp, la arquitectura del sistema, el desarrollo del bot, el diseño e implementación de la base de datos, y el diseño e implementación del agente de IA, construido con LangGraph y LangChain.",
+    state: "Development",
+    image_url: "/images/projects/whatsapp-bot.png"
   }
 ];

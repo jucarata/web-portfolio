@@ -166,6 +166,22 @@ async function updateModal(lang) {
         modalState.textContent = project.state;
         modalState.className = `modal-state modal-state-${stateKey}`;
       }
+      
+      // Actualizar botón de URL si existe
+      const modalUrlButton = document.getElementById('modal-url-button');
+      if (modalUrlButton) {
+        if (project.url) {
+          modalUrlButton.href = project.url;
+          modalUrlButton.style.display = "inline-flex";
+          // Actualizar texto del botón según el idioma
+          const buttonText = modalUrlButton.querySelector('span[data-i18n]');
+          if (buttonText) {
+            buttonText.textContent = t('visitProject', lang);
+          }
+        } else {
+          modalUrlButton.style.display = "none";
+        }
+      }
     }
   }
 }

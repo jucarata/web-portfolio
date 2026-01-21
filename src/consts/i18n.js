@@ -10,7 +10,8 @@ export const translations = {
     project: "Project",
     development: "Development",
     finished: "Finished",
-    language: "Language"
+    language: "Language",
+    visitProject: "Visit project"
   },
   es: {
     greeting: "Hola, soy",
@@ -22,7 +23,8 @@ export const translations = {
     project: "Proyecto",
     development: "En desarrollo",
     finished: "Finalizado",
-    language: "Idioma"
+    language: "Idioma",
+    visitProject: "Visitar proyecto"
   }
 };
 

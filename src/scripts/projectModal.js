@@ -43,6 +43,7 @@ export async function initProjectModal() {
   const modalTitle = document.getElementById("modal-title");
   const modalState = document.getElementById("modal-state");
   const modalDescription = document.getElementById("modal-description");
+  const modalUrlButton = document.getElementById("modal-url-button");
 
   if (!modal || !modalOverlay || !modalClose) return;
 
@@ -79,6 +80,21 @@ export async function initProjectModal() {
     }
     
     modalDescription.textContent = project.description || "";
+    
+    // Mostrar/ocultar botón de URL según si el proyecto tiene URL
+    if (modalUrlButton) {
+      if (project.url) {
+        modalUrlButton.href = project.url;
+        modalUrlButton.style.display = "inline-flex";
+        // Actualizar texto del botón según el idioma
+        const buttonText = modalUrlButton.querySelector('span[data-i18n]');
+        if (buttonText) {
+          buttonText.textContent = t('visitProject', lang);
+        }
+      } else {
+        modalUrlButton.style.display = "none";
+      }
+    }
 
     modal.classList.add("active");
     document.body.style.overflow = "hidden";

@@ -1,0 +1,79 @@
+---
+import About from "../components/About.astro";
+import Contact from "../components/Contact.astro";
+import Education from "../components/Education.astro";
+import Experience from "../components/Experience.astro";
+import Header from "../components/Header.astro";
+import Projects from "../components/Projects.astro";
+import Base from "../layouts/Base.astro";
+import { profile } from "../data/site";
+---
+
+<Base title={`${profile.name} · Jucarata`} description={profile.description}>
+  <Header />
+  <main id="content">
+    <About />
+    <Projects />
+    <Experience />
+    <Education />
+    <Contact />
+  </main>
+</Base>
+
+<script>
+  const header = document.querySelector(".header");
+  const toggle = document.querySelector(".menu-btn");
+  const nav = document.querySelector("#site-nav");
+  const label = toggle?.querySelector(".menu-label");
+
+  const setOpen = (open: boolean) => {
+    header?.classList.toggle("is-open", open);
+    nav?.classList.toggle("is-open", open);
+    toggle?.setAttribute("aria-expanded", String(open));
+    if (label) label.textContent = open ? "Close" : "Menu";
+    document.body.classList.toggle("nav-open", open);
+  };
+
+  toggle?.addEventListener("click", () => {
+    setOpen(toggle.getAttribute("aria-expanded") !== "true");
+  });
+
+  nav?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => setOpen(false));
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setOpen(false);
+  });
+
+  const menuQuery = window.matchMedia("(max-width: 900px)");
+  menuQuery.addEventListener("change", (event) => {
+    if (!event.matches) setOpen(false);
+  });
+
+  const links = [...document.querySelectorAll<HTMLAnchorElement>("#site-nav a")];
+  const sections = links
+    .map((link) => document.querySelector(link.getAttribute("href") || ""))
+    .filter((section): section is HTMLElement => section instanceof HTMLElement);
+
+  const markCurrent = (id: string) => {
+    links.forEach((link) => {
+      const active = link.getAttribute("href") === `#${id}`;
+      if (active) link.setAttribute("aria-current", "true");
+      else link.removeAttribute("aria-current");
+    });
+  };
+
+  if (sections.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible?.target.id) markCurrent(visible.target.id);
+      },
+      { rootMargin: "-20% 0px -55% 0px", threshold: [0.1, 0.25, 0.5] },
+    );
+    sections.forEach((section) => observer.observe(section));
+  }
+</script>

@@ -1,0 +1,30 @@
+---
+import { nav } from "../data/site";
+import { asset } from "../lib/asset";
+---
+
+<header class="header">
+  <div class="wrap header-bar">
+    <a class="brand" href="#about">
+      <img src={asset("mark.png")} width="450" height="420" alt="" />
+      <span>JUCARATA</span>
+    </a>
+    <button
+      class="menu-btn"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-nav"
+    >
+      <span class="menu-label">Menu</span>
+    </button>
+    <nav id="site-nav" class="nav" aria-label="Sections">
+      {
+        nav.map((item, index) => (
+          <a href={item.href} aria-current={index === 0 ? "true" : undefined}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>

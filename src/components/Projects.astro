@@ -1,0 +1,29 @@
+---
+import { projects } from "../data/site";
+---
+
+<section class="section" id="projects" aria-labelledby="projects-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title" id="projects-title">
+        <span class="sq sq-blue" aria-hidden="true"></span>
+        Projects
+      </h2>
+      <p>
+        Case studies are not published yet. These four slots follow the practice: architecture, backend, artificial intelligence, and systems integration.
+      </p>
+    </div>
+    <div class="blocks">
+      {
+        projects.map((item) => (
+          <article class="panel">
+            <span class:list={["swatch", `swatch-${item.tone}`]} aria-hidden="true" />
+            <p class="flag">Placeholder</p>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

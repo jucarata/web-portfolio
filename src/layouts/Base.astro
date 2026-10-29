@@ -1,0 +1,62 @@
+---
+import "@fontsource/plus-jakarta-sans/400.css";
+import "@fontsource/plus-jakarta-sans/500.css";
+import "@fontsource/plus-jakarta-sans/600.css";
+import "@fontsource/plus-jakarta-sans/700.css";
+import "../styles/global.css";
+import { profile } from "../data/site";
+import { asset } from "../lib/asset";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const ogImage = Astro.site
+  ? new URL(asset("banner.jpeg"), Astro.site).href
+  : asset("banner.jpeg");
+
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  alternateName: profile.username,
+  jobTitle: profile.role,
+  email: profile.email,
+  description,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Cali",
+    addressCountry: "Colombia",
+  },
+  knowsAbout: [
+    "Backend engineering",
+    "Artificial intelligence",
+    "Data modeling",
+    "Microservices",
+  ],
+});
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Juan Camilo Ramirez" />
+    <meta name="theme-color" content="#242021" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImage} />
+    <link rel="icon" href={asset("mark.png")} type="image/png" />
+    <script type="application/ld+json" set:html={jsonLd} />
+  </head>
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <slot />
+  </body>
+</html>

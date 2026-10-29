@@ -1,0 +1,88 @@
+---
+import { experienceStart, experienceYears, languages, profile, skills } from "../data/site";
+import { asset } from "../lib/asset";
+
+const palette = ["red", "blue", "yellow", "ink", "ink"] as const;
+const years = experienceYears();
+const cells = Array.from({ length: 25 }, (_, index) => {
+  const seed = (index * 7 + 3) % 11;
+  if (seed < 3) return palette[seed];
+  if (seed < 6) return "ghost";
+  return "empty";
+});
+---
+
+<section class="about" id="about" aria-label="About">
+  <div class="wrap">
+    <div class="about-lead">
+      <div>
+        <p class="section-label">
+          <span class="sq sq-red" aria-hidden="true"></span>
+          About
+        </p>
+        <h1>
+          {profile.given}<br />{profile.family}
+        </h1>
+        <p class="role">{profile.role}</p>
+        <p class="where">{profile.location}</p>
+        <p class="practice">{profile.line}</p>
+        <p class="tenure"><span id="tenure">{years}+</span> years</p>
+        <div class="actions">
+          <a class="button button-solid" href="#contact">Contact me</a>
+          <a class="button button-ghost" href="#projects">Projects</a>
+        </div>
+      </div>
+      <div class="mosaic" aria-hidden="true">
+        {
+          cells.map((tone, index) => (
+            <span class:list={["tile", `tile-${tone}`]} style={`--i:${index}`} />
+          ))
+        }
+      </div>
+    </div>
+
+    <figure class="banner">
+      <img
+        src={asset("banner.jpeg")}
+        width="2506"
+        height="416"
+        alt={`${profile.name}, Software Engineer, with the Jucarata mark.`}
+        fetchpriority="high"
+      />
+    </figure>
+
+    <div class="skills">
+      <h2 class="subhead">Technical skills</h2>
+      <div class="blocks">
+        {
+          skills.map((group) => (
+            <article class="panel">
+              <span class:list={["swatch", `swatch-${group.tone}`]} aria-hidden="true" />
+              <h3>{group.title}</h3>
+              <p>{group.items.join(", ")}.</p>
+            </article>
+          ))
+        }
+      </div>
+      <p class="languages">
+        Languages.{" "}
+        {
+          languages
+            .map((language) => `${language.name}, ${language.level}`)
+            .join(". ")
+        }
+      </p>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ startYear: experienceStart.year, startMonth: experienceStart.month }}>
+  const node = document.getElementById("tenure");
+  if (node) {
+    const now = new Date();
+    let years = now.getFullYear() - startYear;
+    if (now.getMonth() < startMonth) years -= 1;
+    if (years < 0) years = 0;
+    node.textContent = `${years}+`;
+  }
+</script>

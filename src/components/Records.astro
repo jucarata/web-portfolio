@@ -1,0 +1,41 @@
+---
+interface Item {
+  title: string;
+  org: string;
+  when: string;
+  detail?: string;
+  summary?: string;
+  points?: readonly string[];
+}
+
+interface Props {
+  items: readonly Item[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="records">
+  {
+    items.map((item) => (
+      <article class="record">
+        <div>
+          <h3>{item.title}</h3>
+          <p class="org">
+            {item.org}
+            {item.detail ? ` · ${item.detail}` : ""}
+          </p>
+        </div>
+        <p class="when">{item.when}</p>
+        {item.summary && <p class="record-body">{item.summary}</p>}
+        {item.points && item.points.length > 0 && (
+          <ul class="record-points">
+            {item.points.map((point) => (
+              <li>{point}</li>
+            ))}
+          </ul>
+        )}
+      </article>
+    ))
+  }
+</div>

@@ -1,0 +1,16 @@
+---
+import { experience } from "../data/site";
+import Records from "./Records.astro";
+---
+
+<section class="section" id="experience" aria-labelledby="experience-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title" id="experience-title">
+        <span class="sq sq-yellow" aria-hidden="true"></span>
+        Experience
+      </h2>
+    </div>
+    <Records items={experience} />
+  </div>
+</section>

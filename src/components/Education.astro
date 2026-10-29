@@ -1,0 +1,16 @@
+---
+import { education } from "../data/site";
+import Records from "./Records.astro";
+---
+
+<section class="section" id="education" aria-labelledby="education-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title" id="education-title">
+        <span class="sq sq-ink" aria-hidden="true"></span>
+        Education
+      </h2>
+    </div>
+    <Records items={education} />
+  </div>
+</section>

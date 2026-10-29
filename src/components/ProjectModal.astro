@@ -1,0 +1,252 @@
+---
+// Componente Modal para mostrar detalles del proyecto
+---
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<div class="project-modal" id="project-modal" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+  <div class="modal-overlay" id="modal-overlay"></div>
+  <div class="modal-content">
+    <button class="modal-close" id="modal-close" aria-label="Close modal" data-i18n="closeModal">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="modal-image-container">
+      <img id="modal-image" src="" alt="" />
+    </div>
+    <div class="modal-info">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-title"></h3>
+        <div class="modal-actions">
+          <span class="modal-state" id="modal-state"></span>
+          <a id="modal-url-button" class="modal-url-button" href="" target="_blank" rel="noopener noreferrer" style="display: none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+            <span data-i18n="visitProject">Visitar proyecto</span>
+          </a>
+        </div>
+      </div>
+      <p class="modal-description" id="modal-description"></p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .project-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .project-modal.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+  }
+
+  .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-content {
+    position: relative;
+    background: var(--color-white);
+    border-radius: 20px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    z-index: 1;
+  }
+
+  .project-modal.active .modal-content {
+    transform: scale(1);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(153, 13, 53, 0.2);
+    color: var(--color-dark-red);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, transform 0.2s ease;
+    z-index: 10;
+  }
+
+  .modal-close:hover {
+    background: var(--color-white);
+    transform: rotate(90deg);
+    border-color: var(--color-red);
+  }
+
+  .modal-image-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--color-cream);
+    flex-shrink: 0;
+  }
+
+  .modal-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .modal-info {
+    padding: 2rem;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-dark-red);
+    margin: 0;
+    letter-spacing: 0.02em;
+    flex: 1;
+  }
+
+  .modal-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .modal-state {
+    display: inline-block;
+    padding: 0.4rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: 'Poppins', sans-serif;
+    white-space: nowrap;
+  }
+
+  .modal-state.modal-state-development {
+    background: rgba(100, 181, 246, 0.2);
+    color: #1976d2;
+    border: 1px solid rgba(100, 181, 246, 0.4);
+  }
+
+  .modal-state.modal-state-finished {
+    background: rgba(255, 167, 38, 0.2);
+    color: #f57c00;
+    border: 1px solid rgba(255, 167, 38, 0.4);
+  }
+
+  .modal-description {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #666666;
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .modal-url-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--color-dark-red);
+    color: var(--color-white);
+    text-decoration: none;
+    border-radius: 12px;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .modal-url-button:hover {
+    background: var(--color-red);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(153, 13, 53, 0.3);
+  }
+
+  .modal-url-button:active {
+    transform: translateY(0);
+  }
+
+  .modal-url-button svg {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .modal-content {
+      width: 95%;
+      max-height: 90vh;
+    }
+
+    .modal-info {
+      padding: 1.5rem;
+    }
+
+    .modal-header {
+      flex-wrap: wrap;
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+    }
+
+    .modal-actions {
+      flex-wrap: wrap;
+    }
+
+    .modal-description {
+      font-size: 1rem;
+    }
+  }
+</style>

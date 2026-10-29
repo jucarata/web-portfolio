@@ -1,0 +1,80 @@
+.curtains-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1000;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.curtain {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.18) 0px,
+      rgba(0, 0, 0, 0.05) 10px,
+      rgba(255, 255, 255, 0.06) 20px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(153, 13, 53, 0.98) 0%,
+      rgba(153, 13, 53, 0.9) 45%,
+      rgba(153, 13, 53, 0.98) 100%
+    );
+  box-shadow:
+    inset 0 0 20px rgba(0, 0, 0, 0.35),
+    0 10px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+.curtain::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.curtain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 100% at 50% 50%,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.02) 35%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.curtain-left {
+  left: 0;
+  transform-origin: right center;
+  /* Estado inicial: abiertas (82% fuera de pantalla) */
+  transform: translateX(-82%) skewY(5deg);
+}
+
+.curtain-left::before {
+  right: 0;
+}
+
+.curtain-right {
+  right: 0;
+  transform-origin: left center;
+  /* Estado inicial: abiertas (82% fuera de pantalla) */
+  transform: translateX(82%) skewY(-5deg);
+}
+
+.curtain-right::before {
+  left: 0;
+}

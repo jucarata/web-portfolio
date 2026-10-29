@@ -5,7 +5,7 @@ export const profile = {
   username: "Jucarata",
   role: "Software Engineer",
   location: "Cali, Colombia",
-  email: "juancaram21@gmail.com",
+  email: "contact.jucara@gmail.com",
   description:
     "Jucarata. Software Engineer in backend, AI, and data engineering. Based in Cali, Colombia.",
   line: "I build backend systems, data models, and AI agents, and connect them to the services around them.",

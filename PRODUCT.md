@@ -33,16 +33,16 @@ Essence: scalability, precision, solidity, and structured innovation. Values: pr
 
 ## Operating Context
 
-One scrolling page. Visitors move from About through Projects, Experience, and Education, then to Contact. Experience, education, the summary, skills, location, and email are the supplied record. Projects stay placeholders. No phone number is published. No deploy target is decided.
+One scrolling page. Visitors move from About through Projects, Experience, and Education, then to Contact. Experience, education, the summary, skills, location, and email are the supplied record. Projects are two groups: professional work already described by the author, and personal products tied to a public repository and, when one exists, a live URL. A project image renders only when its file is in `public/projects`. No phone number is published. The site deploys with GitHub Pages.
 
 ## Capabilities and Constraints
 
 - One page. Sections, in order: Home (About), Projects, Experience, Education, Contact me.
 - Site language is English.
-- Projects stay labeled placeholder. Do not invent case studies, metrics, or clients. Do not publish a phone number.
-- Use the supplied logo and professional banner.
+- Do not invent clients, metrics, or projects that are not in `src/data/site.ts`. Do not publish a phone number.
+- Use the supplied logo and professional banner. Project images live in `public/projects`.
 - Minimal. Industry-standard portfolio structure, with the brand manual kept intact.
-- Undecided: real case studies, and a YouTube channel if one is supplied later.
+- Undecided: further case studies, personal-project screenshots, and a YouTube channel if one is supplied later.
 
 ## Brand Commitments
 
@@ -58,7 +58,8 @@ One scrolling page. Visitors move from About through Projects, Experience, and E
 - `brand-manual.md` — identity, palette, type direction, logo rules, voice, and the Spanish value proposition.
 - `assets/logo.jpeg` — geometric mark on a light ground.
 - `assets/banner.jpeg` — "JUAN CAMILO RAMIREZ" with "Software Engineer" and the mark.
-- Absent, and not to be fabricated as real: project case studies, testimonials, and metrics. A phone number is known and must stay off the site.
+- Professional project copy and screenshots come from the author's earlier portfolio: SGIRS and Integra.
+- Absent, and not to be fabricated as real: testimonials and metrics. A phone number is known and must stay off the site.
 
 ## Product Principles
 

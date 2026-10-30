@@ -97,26 +97,59 @@ export const skills = [
 
 export const languages = [{ name: "English", level: "Intermediate (B1)" }] as const;
 
-export const projects = [
+export const professionalProjects = [
+  {
+    tone: "blue",
+    title: "SGIRS",
+    status: "Finished",
+    privacy: "Public",
+    text: "Waste reporting platform for the Mayor's Office of Santiago de Cali. Businesses record what they generate and how it is treated. I built authentication, the business logic, and the transactional and dimensional databases.",
+    image: "projects/sgirs.jpeg",
+    imageAlt: "SGIRS Cali sign-in screen.",
+    live: "https://sgirs.cali.gov.co/",
+  },
   {
     tone: "red",
-    title: "Architecture",
-    text: "Reserved for a real system design. The problem, the structure, and the result are not written yet.",
+    title: "Integra",
+    status: "In dev",
+    privacy: "Private",
+    text: "Asset inventory for a company located in Medellín. It follows equipment through registration, assignment, return, and decommission. I worked on the interface, the business logic, the database, and the application architecture. The platform stays private while it is in development.",
+    image: "projects/default.jpg",
+    imageAlt: "",
+  },
+] as const;
+
+export const personalProjects = [
+  {
+    tone: "ink",
+    title: "Financa",
+    status: "Finished",
+    privacy: "Public",
+    text: "Personal finance records: income, monthly savings, and balances by bank.",
+    image: "projects/financa.png",
+    imageAlt: "Financa, a personal finance screen.",
+    repo: "https://github.com/jucarata/Financa",
+    live: "https://jucarata.github.io/Financa/",
   },
   {
     tone: "blue",
-    title: "Backend",
-    text: "Reserved for a real service or platform. Scope and outcome are not written yet.",
+    title: "Medicfy",
+    status: "Finished",
+    privacy: "Public",
+    text: "Medication reminders on WhatsApp. One QR link, a schedule, and the messages go out on their own.",
+    image: "projects/medicfy.png",
+    imageAlt: "Medicfy reminder schedule.",
+    repo: "https://github.com/jucarata/Medicfy",
   },
   {
-    tone: "yellow",
-    title: "Artificial intelligence",
-    text: "Reserved for a real applied-intelligence build. What it does is not written yet.",
-  },
-  {
-    tone: "ink",
-    title: "Systems integration",
-    text: "Reserved for a real integration. The systems involved are not written yet.",
+    tone: "red",
+    title: "Job Matching Assistant",
+    status: "Finished",
+    privacy: "Public",
+    text: "Compares a CV with a vacancy and returns matches, mismatches, and a score.",
+    image: "projects/job-matching.png",
+    imageAlt: "Job Matching Assistant comparing a CV with a vacancy.",
+    repo: "https://github.com/jucarata/Job-Matching-Assistant",
   },
 ] as const;
 

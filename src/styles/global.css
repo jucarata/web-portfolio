@@ -33,7 +33,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-body.nav-open {
+body.nav-open,
+body.lightbox-open {
   overflow: hidden;
 }
 
@@ -460,6 +461,7 @@ h1 {
 }
 
 .project {
+  position: relative;
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -576,6 +578,102 @@ h1 {
   background: var(--ink);
   color: #fff;
   border-color: var(--ink);
+}
+
+.project-open {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.project.is-zoomable .project-links a {
+  position: relative;
+  z-index: 2;
+}
+
+.lightbox {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: hidden;
+}
+
+.lightbox:focus {
+  outline: none;
+}
+
+.lightbox::backdrop {
+  background: rgba(36, 32, 33, 0.94);
+}
+
+.lightbox-stage {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 72px 24px 28px;
+}
+
+.lightbox-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: min(1080px, 100%);
+  margin: 0;
+}
+
+.lightbox-img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 140px);
+  max-height: calc(100dvh - 140px);
+  object-fit: contain;
+  background: #fff;
+}
+
+.lightbox-caption {
+  color: #fff;
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 12px;
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.lightbox-close:hover {
+  background: #fff;
+  color: var(--ink);
 }
 
 .note {

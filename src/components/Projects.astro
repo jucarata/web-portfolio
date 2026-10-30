@@ -55,7 +55,7 @@ const groups = [
           </h3>
           <div class="project-grid">
             {group.items.map((item) => (
-              <article class="project">
+              <article class:list={["project", { "is-zoomable": item.custom }]}>
                 <figure class:list={["project-media", { "is-default": !item.custom }]}>
                   <img
                     src={item.src}
@@ -64,6 +64,17 @@ const groups = [
                     height="1000"
                   />
                 </figure>
+                {item.custom ? (
+                  <button
+                    type="button"
+                    class="project-open"
+                    data-src={item.src}
+                    data-alt={item.imageAlt}
+                    data-title={item.title}
+                    aria-haspopup="dialog"
+                    aria-label={`View ${item.title} image`}
+                  />
+                ) : null}
                 <div class="project-body">
                   <p class="project-status">
                     <span class:list={["swatch", `swatch-${item.tone}`]} aria-hidden="true" />
@@ -95,3 +106,53 @@ const groups = [
     }
   </div>
 </section>
+
+<dialog class="lightbox" id="project-lightbox" aria-labelledby="lightbox-title">
+  <button type="button" class="lightbox-close" data-lightbox-close>Close</button>
+  <div class="lightbox-stage">
+    <figure class="lightbox-figure">
+      <img class="lightbox-img" alt="" />
+      <figcaption class="lightbox-caption" id="lightbox-title"></figcaption>
+    </figure>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.querySelector("#project-lightbox");
+  const image = dialog?.querySelector(".lightbox-img");
+  const caption = dialog?.querySelector(".lightbox-caption");
+
+  function isPlaceholder(src) {
+    return src.endsWith("projects/default.jpg");
+  }
+
+  function openFrom(button) {
+    if (!(dialog instanceof HTMLDialogElement) || !(image instanceof HTMLImageElement)) return;
+    const src = button.dataset.src ?? "";
+    if (!src || isPlaceholder(src)) return;
+    image.src = src;
+    image.alt = button.dataset.alt ?? "";
+    if (caption) caption.textContent = button.dataset.title ?? "";
+    document.body.classList.add("lightbox-open");
+    dialog.showModal();
+  }
+
+  document.querySelectorAll(".project-open").forEach((button) => {
+    button.addEventListener("click", () => {
+      if (button instanceof HTMLButtonElement) openFrom(button);
+    });
+  });
+
+  dialog?.addEventListener("click", (event) => {
+    if (!(dialog instanceof HTMLDialogElement)) return;
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    if (target.closest(".lightbox-figure")) return;
+    dialog.close();
+  });
+
+  dialog?.addEventListener("close", () => {
+    document.body.classList.remove("lightbox-open");
+    if (image instanceof HTMLImageElement) image.removeAttribute("src");
+  });
+</script>

@@ -127,19 +127,9 @@ export const personalProjects = [
     privacy: "Public",
     text: "Personal finance records: income, monthly savings, and balances by bank.",
     image: "projects/financa.png",
-    imageAlt: "Financa, a personal finance screen.",
+    imageAlt: "Financa expense summary, net worth chart, and balance by bank.",
     repo: "https://github.com/jucarata/Financa",
     live: "https://jucarata.github.io/Financa/",
-  },
-  {
-    tone: "blue",
-    title: "Medicfy",
-    status: "Finished",
-    privacy: "Public",
-    text: "Medication reminders on WhatsApp. One QR link, a schedule, and the messages go out on their own.",
-    image: "projects/medicfy.png",
-    imageAlt: "Medicfy reminder schedule.",
-    repo: "https://github.com/jucarata/Medicfy",
   },
   {
     tone: "red",
@@ -148,8 +138,9 @@ export const personalProjects = [
     privacy: "Public",
     text: "Compares a CV with a vacancy and returns matches, mismatches, and a score.",
     image: "projects/job-matching.png",
-    imageAlt: "Job Matching Assistant comparing a CV with a vacancy.",
+    imageAlt: "Job Matching Assistant showing a match score and the profile read from a CV.",
     repo: "https://github.com/jucarata/Job-Matching-Assistant",
+    live: "https://jucarata.github.io/Job-Matching-Assistant/",
   },
 ] as const;
 

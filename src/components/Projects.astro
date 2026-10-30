@@ -77,7 +77,13 @@ const groups = [
                 ) : null}
                 <div class="project-body">
                   <p class="project-status">
-                    <span class:list={["swatch", `swatch-${item.tone}`]} aria-hidden="true" />
+                    <span
+                      class:list={[
+                        "swatch",
+                        item.status === "In dev" ? "swatch-blue" : "swatch-ink",
+                      ]}
+                      aria-hidden="true"
+                    />
                     <span class="flag">{item.status}</span>
                     <span class="flag">{item.privacy}</span>
                   </p>
